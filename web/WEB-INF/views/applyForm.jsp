@@ -6,7 +6,6 @@
     <title>Title</title>
 </head>
 <body>
-<c:out value="${appliant.job.description}" />
 <h1>Register</h1>
 <sf:form method="post" modelAttribute="appliant" enctype="multipart/form-data">
     <table>

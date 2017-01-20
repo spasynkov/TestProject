@@ -10,7 +10,7 @@ public class Appliant {
     @NotNull private String surname;
     @Email private String email;
     private String description;
-    @NotNull private Job job;
+    private Job job;
 
     public Appliant() {
     }
@@ -65,5 +65,45 @@ public class Appliant {
 
     public void setJob(Job job) {
         this.job = job;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Appliant appliant = (Appliant) o;
+
+        if (id != null ? !id.equals(appliant.id) : appliant.id != null) return false;
+        if (firstname != null ? !firstname.equals(appliant.firstname) : appliant.firstname != null) return false;
+        if (surname != null ? !surname.equals(appliant.surname) : appliant.surname != null) return false;
+        if (email != null ? !email.equals(appliant.email) : appliant.email != null) return false;
+        if (description != null ? !description.equals(appliant.description) : appliant.description != null)
+            return false;
+        return job != null ? job.equals(appliant.job) : appliant.job == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (job != null ? job.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Appliant{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", description='" + description + '\'' +
+                ", job=" + job +
+                '}';
     }
 }

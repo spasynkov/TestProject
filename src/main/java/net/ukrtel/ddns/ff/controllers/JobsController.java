@@ -43,7 +43,7 @@ public class JobsController {
                            Model model) {
 
         checkJobId(jobId);
-        model.addAttribute(new Appliant(jobsRepository.findOne(jobId)));
+        model.addAttribute(new Appliant());
         return "applyForm";
     }
 
@@ -55,10 +55,10 @@ public class JobsController {
 
         checkJobId(jobId);
         if (errors.hasErrors()) {
-            model.addAttribute(appliant);
             return "applyForm";
         }
 
+        appliant.setJob(jobsRepository.findOne(jobId));
         appliantsRepository.add(appliant);
         model.addFlashAttribute(appliant);
 

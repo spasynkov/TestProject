@@ -8,10 +8,18 @@ import java.util.List;
 
 @Component
 public class AppliantsRepositoryImpl implements AppliantsRepository {
-    private List<Appliant> list = new ArrayList<Appliant>();
+    private final List<Appliant> list = new ArrayList<Appliant>();
 
-    public void add(Appliant appliant) {
-        list.add(appliant);
-        appliant.setId(list.size() - 1);
+    public int add(Appliant appliant) {
+        int result;
+
+        synchronized (list) {
+            list.add(appliant);
+            result = list.size();
+        }
+
+        appliant.setId(result - 1);
+
+        return result;
     }
 }
