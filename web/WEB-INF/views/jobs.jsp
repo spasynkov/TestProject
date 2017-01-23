@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
             <h3>Jobs list:</h3>
             <ul>
               <c:forEach items="${jobsList}" var="job">

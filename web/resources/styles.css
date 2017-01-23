@@ -1,0 +1,50 @@
+.list {
+    margin-right: 10px;
+    padding: 10px;
+}
+
+.list table {
+
+}
+
+.notification:before {
+    content: "Notification:";
+}
+.notification {
+    color: green;
+    background-color: aquamarine;
+    padding: 10px;
+}
+
+#footer {
+    float: none;
+}
+
+#editJobs {
+    margin: 10px;
+    padding: 10px;
+    float: left;
+    border: solid thin;
+}
+
+#edit {
+    padding: 5px;
+}
+
+#delete {
+    padding: 5px;
+}
+
+#addBtn {
+    margin: 2px;
+}
+
+#saveBtn {
+    display: none;
+    margin: 2px;
+}
+
+#clearBtn {
+    display: none;
+    margin: 2px;
+}

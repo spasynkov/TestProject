@@ -35,4 +35,14 @@ public class JobsService {
         if (jobId < 0 || jobId >= jobsRepository.getAll().size())
             throw new JobsIdOutOfBoundsException("No job with id #" + jobId);
     }
+
+    public void deleteJobById(long id) {
+        checkJobId(id);
+        jobsRepository.delete(id);
+    }
+
+    public void save(Job job) {
+        if (job.getId() == null) jobsRepository.add(job);
+        else jobsRepository.update(job);
+    }
 }

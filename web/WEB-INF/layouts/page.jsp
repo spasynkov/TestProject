@@ -1,13 +1,15 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="t" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
     <head>
         <title>Title</title>
         <link rel="stylesheet"
               type="text/css"
-              href="<s:url value="/resources/style.css" />" >
+              href="<s:url value="/resources/styles.css" />" >
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="<c:url value="/resources/scripts.js"/>"></script>
     </head>
 
     <body>

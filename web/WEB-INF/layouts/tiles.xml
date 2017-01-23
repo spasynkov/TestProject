@@ -28,4 +28,16 @@
     <definition name="login" extends="base">
         <put-attribute name="body" value="/WEB-INF/views/login.jsp" />
     </definition>
+
+    <definition name="admin" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/admin/main.jsp" />
+    </definition>
+
+    <definition name="admin/users" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/admin/manageUsers.jsp" />
+    </definition>
+
+    <definition name="admin/jobs" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/admin/manageJobs.jsp" />
+    </definition>
 </tiles-definitions>
