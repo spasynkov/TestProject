@@ -1,4 +1,4 @@
-package net.ukrtel.ddns.ff;
+package net.ukrtel.ddns.ff.domain;
 
 import org.hibernate.validator.constraints.Email;
 

@@ -1,8 +1,8 @@
 package net.ukrtel.ddns.ff.controllers;
 
-import net.ukrtel.ddns.ff.Appliant;
 import net.ukrtel.ddns.ff.data.AppliantsRepository;
 import net.ukrtel.ddns.ff.data.JobsRepository;
+import net.ukrtel.ddns.ff.domain.Appliant;
 import net.ukrtel.ddns.ff.exceptions.JobsIdOutOfBoundsException;
 import net.ukrtel.ddns.ff.exceptions.NoAppliantForJobRequestedException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;

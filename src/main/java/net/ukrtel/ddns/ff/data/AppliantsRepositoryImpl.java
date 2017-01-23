@@ -1,6 +1,6 @@
 package net.ukrtel.ddns.ff.data;
 
-import net.ukrtel.ddns.ff.Appliant;
+import net.ukrtel.ddns.ff.domain.Appliant;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

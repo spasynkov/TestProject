@@ -1,4 +1,4 @@
-package net.ukrtel.ddns.ff;
+package net.ukrtel.ddns.ff.controllers;
 
 import net.ukrtel.ddns.ff.exceptions.NoAppliantForJobRequestedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;

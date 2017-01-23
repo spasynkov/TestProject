@@ -1,6 +1,6 @@
 package net.ukrtel.ddns.ff.data;
 
-import net.ukrtel.ddns.ff.Job;
+import net.ukrtel.ddns.ff.domain.Job;
 
 import java.util.List;
 
