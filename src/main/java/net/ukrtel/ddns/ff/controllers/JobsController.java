@@ -1,10 +1,9 @@
 package net.ukrtel.ddns.ff.controllers;
 
-import net.ukrtel.ddns.ff.data.AppliantsRepository;
-import net.ukrtel.ddns.ff.data.JobsRepository;
 import net.ukrtel.ddns.ff.domain.Appliant;
-import net.ukrtel.ddns.ff.exceptions.JobsIdOutOfBoundsException;
 import net.ukrtel.ddns.ff.exceptions.NoAppliantForJobRequestedException;
+import net.ukrtel.ddns.ff.services.AppliantsService;
+import net.ukrtel.ddns.ff.services.JobsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,27 +20,24 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Controller
 @RequestMapping("/jobs")
 public class JobsController {
-
-    private JobsRepository jobsRepository;
-    private AppliantsRepository appliantsRepository;
+    private JobsService jobsService;
+    private AppliantsService appliantsService;
 
     @Autowired
-    public JobsController(JobsRepository jobsRepository, AppliantsRepository appliantsRepository) {
-        this.jobsRepository = jobsRepository;
-        this.appliantsRepository = appliantsRepository;
+    public JobsController(JobsService jobsService, AppliantsService appliantsService) {
+        this.jobsService = jobsService;
+        this.appliantsService = appliantsService;
     }
 
     @RequestMapping(method = GET)
     public String listJobs(Model model) {
-        model.addAttribute("jobsList", jobsRepository.getAll());
+        model.addAttribute("jobsList", jobsService.getAllJobs());
         return "jobs";
     }
 
-    @RequestMapping(value = "/apply/{jobId}", method = GET)
-    public String showForm(@PathVariable int jobId,
-                           Model model) {
+    @RequestMapping(value = "/apply/*", method = GET)
+    public String showForm(Model model) {
 
-        checkJobId(jobId);
         model.addAttribute(new Appliant());
         return "applyForm";
     }
@@ -52,13 +48,14 @@ public class JobsController {
                         @Valid Appliant appliant,
                         Errors errors) {
 
-        checkJobId(jobId);
         if (errors.hasErrors()) {
             return "applyForm";
         }
 
-        appliant.setJob(jobsRepository.findOne(jobId));
-        appliantsRepository.add(appliant);
+        appliantsService.addAppliantWithJob(
+                appliant,
+                jobsService.findOne(jobId));
+
         model.addFlashAttribute(appliant);
 
         return "redirect:/jobs/{jobId}";
@@ -68,16 +65,10 @@ public class JobsController {
     public String applied(@PathVariable("jobId") int jobId,
                           Model model) {
 
-        checkJobId(jobId);
         if (!model.containsAttribute("appliant")) {
             throw new NoAppliantForJobRequestedException("" + jobId);
         }
-        model.addAttribute(jobId);
+        model.addAttribute(jobsService.getJobDescription(jobId));
         return "applied";
-    }
-
-    private void checkJobId(int jobId) {
-        if (jobId < 0 || jobId >= jobsRepository.getAll().size())
-            throw new JobsIdOutOfBoundsException("No job with id #" + jobId);
     }
 }
