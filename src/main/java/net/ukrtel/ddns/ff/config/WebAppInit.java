@@ -9,7 +9,7 @@ import java.io.File;
 
 public class WebAppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[] {RootConfig.class};
+        return new Class<?>[] {RootConfig.class, SecurityConfig.class};
     }
 
     protected Class<?>[] getServletConfigClasses() {
