@@ -12,7 +12,9 @@
         <script type="text/javascript" src="<c:url value="/resources/scripts.js"/>"></script>
     </head>
 
-    <body>
+    <body class="rounded-corners-large"<%
+        if (request.getAttribute("javax.servlet.forward.request_uri").toString().contains("/jobs/apply/"))
+            out.print(" onload=\"makeLabels()\"");%>>
         <div id="header">
             <t:insertAttribute name="header" />
         </div>
@@ -26,3 +28,15 @@
         </div>
     </body>
 </html>
+
+<% if (request.getAttribute("javax.servlet.forward.request_uri").toString().contains("/jobs/apply/")) {
+    out.print("<script>\n" +
+            "    document.getElementById(\"file-upload\").onchange = function () {\n" +
+            "        if (this.value == \"\") {\n" +
+            "            document.getElementById(\"label-for-file-upload\").innerHTML = \"UPLOAD\";\n" +
+            "        } else {\n" +
+            "            document.getElementById(\"label-for-file-upload\").innerHTML = this.value.split( '\\\\' ).pop();\n" +
+            "        }\n" +
+            "    };\n" +
+            "</script>");
+} %>

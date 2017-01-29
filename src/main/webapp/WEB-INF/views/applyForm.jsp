@@ -1,39 +1,44 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
-            <h1>Register</h1>
-            <sf:form method="post" modelAttribute="appliant" enctype="multipart/form-data">
+            <div class="header rounded-corners-large add-some-space">REGISTER</div>
+            <sf:form method="post" id="apply-form" modelAttribute="appliant" enctype="multipart/form-data" cssClass="main-area rounded-corners-large add-some-space">
                 <table>
                     <tr>
-                        <td><sf:label path="firstname" cssErrorClass="error">First name: </sf:label></td>
-                        <td><sf:input path="firstname" cssErrorClass="error" /></td>
+                        <td><sf:input id="firstname"
+                                onblur="displayLabel(this, 'first name')" onfocus="hideLabel(this, 'first name')"
+                                path="firstname" cssErrorClass="error" cssClass="rounded-corners-medium" /></td>
                         <td><sf:errors path="firstname" cssClass="error"/></td>
                     </tr>
 
                     <tr>
-                        <td><sf:label path="surname" cssErrorClass="error">Surname: </sf:label></td>
-                        <td><sf:input path="surname" cssErrorClass="error" /></td>
+                        <td><sf:input id="lastname"
+                                onblur="displayLabel(this, 'last name')" onfocus="hideLabel(this, 'last name')"
+                                path="surname" cssErrorClass="error" cssClass="rounded-corners-medium" /></td>
                         <td><sf:errors path="surname" cssClass="error" /></td>
                     </tr>
 
                     <tr>
-                        <td><sf:label path="email" cssErrorClass="error">Email: </sf:label></td>
-                        <td><sf:input path="email" type="email" cssErrorClass="error" /></td>
+                        <td><sf:input id="email"
+                                onblur="displayLabel(this, 'email')" onfocus="hideLabel(this, 'email')"
+                                path="email" type="email" cssErrorClass="error" cssClass="rounded-corners-medium" /></td>
                         <td><sf:errors path="email" cssClass="error" /></td>
                     </tr>
 
                     <tr>
-                        <td><sf:label path="description" cssErrorClass="error">Description: </sf:label></td>
-                        <td><sf:input path="description" cssErrorClass="error" /></td>
+                        <td><sf:textarea id="description"
+                                onblur="displayLabel(this, 'description')" onfocus="hideLabel(this, 'description')"
+                                path="description" cssErrorClass="error" cssClass="rounded-corners-medium" /></td>
                         <td><sf:errors path="description" cssClass="error" /></td>
                     </tr>
 
                     <tr>
-                        <td><label>CV file: </label></td>
-                        <td><input type="file" name="cv"
-                                   accept="image/jpeg,image/png,image/gif" /></td>
+                        <td id="file-row"><p>CV file:</p>
+                            <input id="file-upload" type="file" name="cv" accept="image/jpeg,image/png,image/gif" />
+                            <label id="label-for-file-upload" for="file-upload"
+                                   class="rounded-corners-medium">UPLOAD</label></td>
                     </tr>
                 </table>
-                <input type="submit" value="Send application" />
+                <input id="submit" type="submit" value="SEND APPLICATION" class="rounded-corners-medium" />
 
                 <c:if test="${appliant.id == null}" >
                     <sf:errors path="*" element="div" cssClass="error" />

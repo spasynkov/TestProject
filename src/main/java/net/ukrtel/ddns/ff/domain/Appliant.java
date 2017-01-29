@@ -3,11 +3,18 @@ package net.ukrtel.ddns.ff.domain;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class Appliant {
     private Integer id;     // represents successful appliance operation
-    @NotNull private String firstname;
-    @NotNull private String surname;
+    @NotNull
+    @Size(min = 1, max = 25, message = "Too short/long. should be from 1 to 25 characters.")
+    private String firstname;
+
+    @NotNull
+    @Size(min = 1, max = 25, message = "Too short/long. should be from 1 to 25 characters.")
+    private String surname;
+
     @Email private String email;
     private String description;
     private Job job;
