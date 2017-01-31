@@ -1,12 +1,10 @@
 package net.ukrtel.ddns.ff.data;
 
 import net.ukrtel.ddns.ff.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface UsersRepository {
-    User findOne(long id);
+@Repository
+public interface UsersRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
-    User add(User user);
-    List<User> getAll();
 }

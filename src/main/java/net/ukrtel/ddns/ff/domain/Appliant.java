@@ -2,11 +2,15 @@ package net.ukrtel.ddns.ff.domain;
 
 import org.hibernate.validator.constraints.Email;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+@Entity
 public class Appliant {
-    private Integer id;     // represents successful appliance operation
+    @Id
+    private Long id;     // represents successful appliance operation
     @NotNull
     @Size(min = 1, max = 25, message = "Too short/long. should be from 1 to 25 characters.")
     private String firstname;
@@ -17,6 +21,7 @@ public class Appliant {
 
     @Email private String email;
     private String description;
+    @OneToOne
     private Job job;
 
     public Appliant() {
@@ -26,11 +31,11 @@ public class Appliant {
         this.job = job;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

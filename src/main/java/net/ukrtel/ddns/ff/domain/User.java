@@ -1,16 +1,20 @@
 package net.ukrtel.ddns.ff.domain;
 
-import net.ukrtel.ddns.ff.security.SecurityRoles;
-
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.List;
 
+@Entity
 public class User {
-    private long id;
+    @Id
+    private Long id;
     private String username;
     private String password;
-    private List<SecurityRoles> roles;
+    @ElementCollection
+    private List<String> roles;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -34,11 +38,11 @@ public class User {
         this.password = password;
     }
 
-    public List<SecurityRoles> getRoles() {
+    public List<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<SecurityRoles> roles) {
+    public void setRoles(List<String> roles) {
         this.roles = roles;
     }
 
@@ -49,7 +53,7 @@ public class User {
 
         User user = (User) o;
 
-        if (id != user.id) return false;
+        if (id != null ? !id.equals(user.id) : user.id != null) return false;
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         return roles != null ? roles.equals(user.roles) : user.roles == null;
@@ -58,7 +62,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (roles != null ? roles.hashCode() : 0);

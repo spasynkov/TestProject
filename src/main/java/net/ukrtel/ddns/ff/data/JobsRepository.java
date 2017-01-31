@@ -1,14 +1,9 @@
 package net.ukrtel.ddns.ff.data;
 
 import net.ukrtel.ddns.ff.domain.Job;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface JobsRepository {
-    Job findOne(long id);
-    List<Job> getAll();
-    void add(Job job);
-    void update(Job job);
-    void delete(long jobId);
-    void delete(Job job);
+@Repository
+public interface JobsRepository extends JpaRepository<Job, Long> {
 }

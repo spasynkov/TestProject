@@ -8,15 +8,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AppliantsService {
-    private AppliantsRepository appliantsRepository;
-
     @Autowired
-    public AppliantsService(AppliantsRepository appliantsRepository) {
-        this.appliantsRepository = appliantsRepository;
-    }
+    private AppliantsRepository appliantsRepository;
 
     public void addAppliantWithJob(Appliant appliant, Job job) {
         appliant.setJob(job);
-        appliantsRepository.add(appliant);
+        //appliantsRepository.add(appliant);
+        appliantsRepository.save(appliant);
     }
 }
