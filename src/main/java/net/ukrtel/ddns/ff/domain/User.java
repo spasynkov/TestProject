@@ -1,18 +1,21 @@
 package net.ukrtel.ddns.ff.domain;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.List;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
     private String password;
-    @ElementCollection
-    private List<String> roles;
+
+    @ElementCollection(targetClass = SecurityRoles.class)
+    @CollectionTable(name = "users_roles", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "user_roles_enum")
+    private Set<SecurityRoles> roles;
 
     public Long getId() {
         return id;
@@ -38,11 +41,11 @@ public class User {
         this.password = password;
     }
 
-    public List<String> getRoles() {
+    public Set<SecurityRoles> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<String> roles) {
+    public void setRoles(Set<SecurityRoles> roles) {
         this.roles = roles;
     }
 

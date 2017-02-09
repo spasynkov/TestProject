@@ -1,6 +1,7 @@
 package net.ukrtel.ddns.ff.services;
 
 import net.ukrtel.ddns.ff.data.UsersRepository;
+import net.ukrtel.ddns.ff.domain.SecurityRoles;
 import net.ukrtel.ddns.ff.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,15 +16,19 @@ import java.util.List;
 
 @Service
 public class UsersService implements UserDetailsService {
+    private UsersRepository usersRepository;
+
     @Autowired
-    UsersRepository usersRepository;
+    public void setUsersRepository(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
+    }
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = usersRepository.findByUsername(username);
 
         if (user != null) {
-            List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-            for (String role : user.getRoles()) {
+            List<GrantedAuthority> authorities = new ArrayList<>();
+            for (SecurityRoles role : user.getRoles()) {
                 authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
             }
 
@@ -38,7 +43,6 @@ public class UsersService implements UserDetailsService {
     }
 
     public List<User> getAllUsers() {
-        //return usersRepository.getAll();
         return usersRepository.findAll();
     }
 }

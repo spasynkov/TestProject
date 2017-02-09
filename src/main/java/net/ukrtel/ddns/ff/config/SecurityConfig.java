@@ -1,6 +1,6 @@
 package net.ukrtel.ddns.ff.config;
 
-import net.ukrtel.ddns.ff.security.SecurityRoles;
+import net.ukrtel.ddns.ff.domain.SecurityRoles;
 import net.ukrtel.ddns.ff.services.UsersService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

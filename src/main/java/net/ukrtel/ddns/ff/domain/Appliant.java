@@ -2,15 +2,17 @@ package net.ukrtel.ddns.ff.domain;
 
 import org.hibernate.validator.constraints.Email;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 @Entity
+@Table(name = "appliants", uniqueConstraints = @UniqueConstraint(columnNames = {"id", "email"}))
 public class Appliant {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;     // represents successful appliance operation
+
     @NotNull
     @Size(min = 1, max = 25, message = "Too short/long. should be from 1 to 25 characters.")
     private String firstname;
@@ -19,16 +21,12 @@ public class Appliant {
     @Size(min = 1, max = 25, message = "Too short/long. should be from 1 to 25 characters.")
     private String surname;
 
-    @Email private String email;
+    @Email
+    private String email;
+
     private String description;
-    @OneToOne
-    private Job job;
 
     public Appliant() {
-    }
-
-    public Appliant(Job job) {
-        this.job = job;
     }
 
     public Long getId() {
@@ -71,14 +69,6 @@ public class Appliant {
         this.description = description;
     }
 
-    public Job getJob() {
-        return job;
-    }
-
-    public void setJob(Job job) {
-        this.job = job;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -90,9 +80,7 @@ public class Appliant {
         if (firstname != null ? !firstname.equals(appliant.firstname) : appliant.firstname != null) return false;
         if (surname != null ? !surname.equals(appliant.surname) : appliant.surname != null) return false;
         if (email != null ? !email.equals(appliant.email) : appliant.email != null) return false;
-        if (description != null ? !description.equals(appliant.description) : appliant.description != null)
-            return false;
-        return job != null ? job.equals(appliant.job) : appliant.job == null;
+        return description != null ? description.equals(appliant.description) : appliant.description == null;
 
     }
 
@@ -103,7 +91,6 @@ public class Appliant {
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (job != null ? job.hashCode() : 0);
         return result;
     }
 
@@ -115,7 +102,6 @@ public class Appliant {
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", description='" + description + '\'' +
-                ", job=" + job +
                 '}';
     }
 }
