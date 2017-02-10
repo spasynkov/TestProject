@@ -12,7 +12,7 @@ public class User {
     private String username;
     private String password;
 
-    @ElementCollection(targetClass = SecurityRoles.class)
+    @ElementCollection(targetClass = SecurityRoles.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "users_roles", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "user_roles_enum")
     private Set<SecurityRoles> roles;
