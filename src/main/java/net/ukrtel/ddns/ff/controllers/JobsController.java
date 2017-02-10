@@ -1,6 +1,7 @@
 package net.ukrtel.ddns.ff.controllers;
 
 import net.ukrtel.ddns.ff.domain.Appliant;
+import net.ukrtel.ddns.ff.domain.Job;
 import net.ukrtel.ddns.ff.exceptions.DuplicateEmailForAppliantException;
 import net.ukrtel.ddns.ff.exceptions.NoAppliantForJobRequestedException;
 import net.ukrtel.ddns.ff.services.AppliantsService;
@@ -59,14 +60,16 @@ public class JobsController {
             return "applyForm";
         }
 
-        // checking the uniqueness of email
-        if (appliantsService.isAppliantWithEmailExists(appliant.getEmail())) {
+        Job job = jobsService.findOne(jobId);
+
+        // checking if person identified by email already applied to this job
+        if (appliantsService.isAppliantWithEmailExists(appliesService.getAllAppliantsByJob(job), appliant.getEmail())) {
             throw new DuplicateEmailForAppliantException("Email '" + appliant.getEmail() + "' is already in use.");
         }
 
-        appliesService.createApplyFromAppliantAndJob(
+        appliesService.createNewApply(
                 appliant,
-                jobsService.findOne(jobId),
+                job,
                 request);
 
         model.addFlashAttribute(appliant);
