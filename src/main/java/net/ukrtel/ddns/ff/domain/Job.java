@@ -1,14 +1,22 @@
 package net.ukrtel.ddns.ff.domain;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Entity
+@Table(name = "jobs")
 public class Job {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull(message = "Should not be null")
     @Size(min = 1, max = 265, message = "Should be from 1 to 265 characters")
     private String description;
+
+    public Job() {
+    }
 
     public Job(Long id, String description) {
         this.id = id;

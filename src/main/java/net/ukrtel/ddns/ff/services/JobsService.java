@@ -18,7 +18,8 @@ public class JobsService {
     }
 
     public List<Job> getAllJobs() {
-        return jobsRepository.getAll();
+        // return jobsRepository.getAll();
+        return jobsRepository.findAll();
     }
 
     public Job findOne(long jobId) {
@@ -32,7 +33,7 @@ public class JobsService {
     }
 
     private void checkJobId(long jobId) {
-        if (jobId < 0 || jobId >= jobsRepository.getAll().size())
+        if (jobId < 0 || jobId >= getAllJobs().size())
             throw new JobsIdOutOfBoundsException("No job with id #" + jobId);
     }
 
@@ -42,7 +43,8 @@ public class JobsService {
     }
 
     public void save(Job job) {
-        if (job.getId() == null) jobsRepository.add(job);
-        else jobsRepository.update(job);
+        /*if (job.getId() == null) jobsRepository.add(job);
+        else jobsRepository.update(job);*/
+        jobsRepository.save(job);
     }
 }

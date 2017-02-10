@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 
 @Configuration
-@EnableJpaRepositories({"net.ukrtel.ddns.ff.domain"})
+@EnableJpaRepositories({"net.ukrtel.ddns.ff.data"})
 @PropertySource("/WEB-INF/database.properties")
 public class DatabaseConfig {
     private final Environment env;
@@ -55,12 +55,15 @@ public class DatabaseConfig {
     }
 
     @Bean   // setting EntityManagerFactory
-    public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean(
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(
             DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
 
         LocalContainerEntityManagerFactoryBean bean = new LocalContainerEntityManagerFactoryBean();
         bean.setDataSource(dataSource);
         bean.setJpaVendorAdapter(jpaVendorAdapter);
+        /*Properties properties = new Properties();;
+        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        bean.setJpaProperties(properties);*/
         bean.setPackagesToScan("net.ukrtel.ddns.ff.domain");
         return bean;
     }

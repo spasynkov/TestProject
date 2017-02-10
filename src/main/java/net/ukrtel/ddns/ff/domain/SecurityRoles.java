@@ -1,4 +1,4 @@
-package net.ukrtel.ddns.ff.security;
+package net.ukrtel.ddns.ff.domain;
 
 public enum SecurityRoles {
     ADMIN,

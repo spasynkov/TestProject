@@ -1,22 +1,16 @@
 package net.ukrtel.ddns.ff.services;
 
-import net.ukrtel.ddns.ff.data.AppliantsRepository;
 import net.ukrtel.ddns.ff.domain.Appliant;
-import net.ukrtel.ddns.ff.domain.Job;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AppliantsService {
-    private AppliantsRepository appliantsRepository;
-
-    @Autowired
-    public AppliantsService(AppliantsRepository appliantsRepository) {
-        this.appliantsRepository = appliantsRepository;
-    }
-
-    public void addAppliantWithJob(Appliant appliant, Job job) {
-        appliant.setJob(job);
-        appliantsRepository.add(appliant);
+    public boolean isAppliantWithEmailExists(List<Appliant> appliants, String email) {
+        for (Appliant appliant : appliants) {
+            if (appliant.getEmail().equals(email)) return true;
+        }
+        return false;
     }
 }

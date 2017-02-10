@@ -1,5 +1,6 @@
 package net.ukrtel.ddns.ff.controllers;
 
+import net.ukrtel.ddns.ff.exceptions.DuplicateEmailForAppliantException;
 import net.ukrtel.ddns.ff.exceptions.NoAppliantForJobRequestedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,5 +11,10 @@ public class AppExceptionHandler {
     @ExceptionHandler(NoAppliantForJobRequestedException.class)
     public String noAppliantFound() {
         return "error/noAppliant";
+    }
+
+    @ExceptionHandler(DuplicateEmailForAppliantException.class)
+    public String duplicateEmail() {
+        return "error/duplicateEmail";
     }
 }
